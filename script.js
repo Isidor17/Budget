@@ -59,6 +59,7 @@ function ajouterLigne(type, titre, montant) {
     `;
 
     mettreAJourTotaux();
+    sauvegarderDonnees();
 }
 
 // Fonction pour supprimer une ligne
@@ -68,6 +69,7 @@ function supprimerLigne(button) {
         row.remove();
     }
     mettreAJourTotaux();
+    sauvegarderDonnees();
 }
 
 // Fonction pour mettre à jour les totaux
@@ -93,3 +95,45 @@ function calculerTotal(type) {
     return total;
 }
 
+// Sauvegarder les données dans le local storage
+function sauvegarderDonnees() {
+    const depenses = [];
+    const revenus = [];
+
+    // Collecte des dépenses
+    document.querySelectorAll('#depense tr:not(:first-child)').forEach(row => {
+        const cells = row.querySelectorAll('td');
+        if (cells.length >= 2) {
+            depenses.push({
+                titre: cells[0].textContent,
+                montant: parseFloat(cells[1].textContent)
+            });
+        }
+    });
+
+    // Collecte des revenus
+    document.querySelectorAll('#revenu tr:not(:first-child)').forEach(row => {
+        const cells = row.querySelectorAll('td');
+        if (cells.length >= 2) {
+            revenus.push({
+                titre: cells[0].textContent,
+                montant: parseFloat(cells[1].textContent)
+            });
+        }
+    });
+
+    localStorage.setItem('depenses', JSON.stringify(depenses));
+    localStorage.setItem('revenus', JSON.stringify(revenus));
+}
+
+// Charger les données depuis le local storage
+function chargerDonnees() {
+    const depenses = JSON.parse(localStorage.getItem('depenses')) || [];
+    const revenus = JSON.parse(localStorage.getItem('revenus')) || [];
+
+    depenses.forEach(item => ajouterLigne('depense', item.titre, item.montant));
+    revenus.forEach(item => ajouterLigne('revenu', item.titre, item.montant));
+}
+
+// Charger les données au chargement de la page
+chargerDonnees();
