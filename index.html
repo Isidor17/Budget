@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion du Budget</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1><span style="color: #0C5E69;">B</span><span style="color: #C6BA34;">udget</span></h1>
+        <p>Gestion du budget</p>
+    </header>
+    <main>
+        <div class="summary">
+            <div class="card"> <h3>Budget</h3> <p>F CFA</p> </div>
+            <div class="card"> <h3>Dépenses</h3> <p>F CFA</p> </div>
+            <div class="card"> <h3>Solde</h3> <p>F CFA</p> </div>
+        </div>
+
+        <h2>Liste des dépenses</h2>
+        <table id="tdepense">
+            <thead>
+                <tr>
+                    <th>TITRE</th>
+                    <th>MONTANT</th>
+                    <th>ACTIONS</th>
+                </tr>
+            </thead>
+            <tbody id="depense">
+                <tr>
+                    <td><button class="add" id="btnd"><i class="bi bi-plus-circle"></i>AJOUTER DÉPENSE</button></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Liste des revenues</h2>
+        <table id="trevenu">
+            <thead>
+                <tr>
+                    <th>TITRE</th>
+                    <th>MONTANT</th>
+                    <th>ACTIONS</th>
+                </tr>
+            </thead>
+            <tbody id="revenu">
+                <tr>
+                    <td><button class="add" id="btnr"><i class="bi bi-plus-circle"></i>AJOUTER REVENU</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+    
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3 id="modal-title">AJOUTER UNE OPÉRATION</h3>
+
+            <label for="titre">TITRE</label>
+            <input type="text" id="titre" placeholder="Ex: Électricité">
+
+            <label for="montant">MONTANT</label>
+            <input type="number" id="montant" placeholder="Ex: 15000" min="0">
+
+            <button id="valider">VALIDER</button>
+        </div>
+    </div>
+
+</body>
+<script src="script.js"></script>
+</html>
